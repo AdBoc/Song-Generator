@@ -1,0 +1,13 @@
+{
+  "name": "gobarbra3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run start",
+    "server": "cd api && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
