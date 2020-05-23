@@ -12,7 +12,6 @@ class RoutesHandler {
         } else {
             response.status(addSongResult.status).send(addSongResult.message);
         }
-
     }
 
     async getSong(request, response) {

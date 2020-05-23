@@ -7,6 +7,13 @@ import jwtAuthenticate from './src/middeleware/jwt-authenticate';
 
 const app = express();
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    // res.header("Content-Disposition");
+    next();
+});
+
 passport.use(jwtAuthenticate);
 app.use(bodyParser.urlencoded({
     extended: true
@@ -23,6 +30,6 @@ app.post('/user/login', routesHandler.loginUser)
 app.put('/user/update', passport.authenticate('jwt', { session: false }), routesHandler.updateUser)
 app.get('/*', routesHandler.notFound)
 
-app.listen(3000, () => {
-    console.log('listening on port 3000')
+app.listen(2137, () => {
+    console.log('listening on port 2137');
 })

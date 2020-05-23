@@ -7,16 +7,16 @@ import Login from './components/Login';
 import Register from './components/Register';
 
 import { authContext } from './contexts/authContext'
+import { AUTHORIZE } from './constants';
 
 function App() {
-  const { authStatus, login } = useContext(authContext);
+  const { dispatch } = useContext(authContext);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      login()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      dispatch({ type: AUTHORIZE })
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -34,3 +34,5 @@ function App() {
 }
 
 export default App;
+
+//JESLI WYSLE W PAYLOADZIE TOKEN TO MEGE GO SETOWAC W REDUCERZE I PRZECHOWYWAC W CONTEXCIE BEZ ZABAWY W REGEXY ABY GO ZDOBYC
