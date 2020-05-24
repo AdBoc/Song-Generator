@@ -7,7 +7,13 @@ in my opinion, for low-frequency updates like locale, theme changes, user authen
 REACT DEVS about future of hooks
 We intend for Hooks to cover all existing use cases for classes, but we will keep supporting class components for the foreseeable future.
 
-
-v 0.1 - created project with CRA, added routes, added login and logout context 
+v 0.1 - created project with CRA, added routes, added login and logout context
 v 0.1.1 - small change in README
 v 0.5 - added player and download button to home
+v 0.5.1 - small fixes
+v 0.5.2 - new put request to change user data
+
+ToDo:
+weryfikacja pól
+menu zależne od tego czy ktoś zalogowany czy nie
+zmiana danych uzytkownika

@@ -53,6 +53,4 @@ const Register = () => {
 };
 
 export default Register;
-
-
 //ZORBIC PAYLOAD Z ERROR dispatch({ type: REGISTER_FAILURE, payload: error })

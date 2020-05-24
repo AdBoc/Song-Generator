@@ -5,8 +5,11 @@ import { history } from './_helpers/history';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import User from './components/User';
+import NavBar from './components/Navbar';
 
-import { authContext } from './contexts/authContext'
+import { PrivateRoute } from './_helpers/privateRoute';
+import { authContext } from './contexts/authContext';
 import { AUTHORIZE } from './constants';
 
 function App() {
@@ -22,10 +25,12 @@ function App() {
   return (
     <Router history={history}>
       <div className="App">
+        <NavBar />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
+          <PrivateRoute path='/user' component={User} />
           <Route component={() => <div>Route Does Not Exist</div>} />
         </Switch>
       </div>

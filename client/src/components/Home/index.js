@@ -13,20 +13,21 @@ const Home = () => {
     let token = localStorage.getItem('token');
     if (token) token = token.replace(/^"(.*)"$/, '$1');
 
-    axios({
-      url: 'http://localhost:2137/song',
-      method: 'GET',
+    axios.post('http://localhost:2137/song/add', {
+      "text": textField,
+      "language": "pl"
+    }, {
       headers: {
         'Authorization': "Bearer " + token
       },
-      responseType: 'blob',
-    }).then((response) => {
+      responseType: 'blob'
+    }).then(response => {
       const mp3 = new Blob([response.data], { type: 'audio/mp3' });
       const url = window.URL.createObjectURL(mp3);
       setSong(url);
     }).catch(error => {
       console.log(error);
-    });
+    })
 
     setTextField('');
   }
