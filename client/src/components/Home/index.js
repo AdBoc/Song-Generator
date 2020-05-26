@@ -7,7 +7,6 @@ const Home = () => {
   const [song, setSong] = useState(null);
   const [textField, setTextField] = useState('');
   const [language, setLanguage] = useState('pl');
-
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -28,6 +27,10 @@ const Home = () => {
     songService.downloadSong(song);
   }
 
+  const isButtonValid = () => {
+    return authStatus.isLogged && !isLoading
+  }
+
   return (
     <div>
 
@@ -45,12 +48,12 @@ const Home = () => {
           </label>
         </div>
         <textarea onChange={(e) => setTextField(e.target.value)} value={textField} required></textarea>
-        <input type="submit" value="submit" disabled={authStatus.isLogged ? false : true}></input>
+        <input type="submit" value="submit" disabled={isButtonValid() ? false : true}></input>
       </form>
 
       <audio controls src={song} type="audio/mp3" />
       {isLoading && <div>Loading...</div>}
-      <button onClick={handleDownload} disabled={song ? false : true}>Download song</button>
+      {song ? <button onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
 
     </div >
   )

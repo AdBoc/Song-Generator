@@ -2,11 +2,10 @@ import React, { useContext, useState } from 'react';
 import { authContext } from '../../contexts/authContext'
 import {
   LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT
+  LOGIN_FAILURE
 } from '../../constants';
 import axios from 'axios';
-import { history } from '../../_helpers/history';
+import { Redirect } from 'react-router-dom';
 
 const Login = () => {
   const { authStatus, dispatch } = useContext(authContext);
@@ -25,23 +24,17 @@ const Login = () => {
         const token = response.data.token
         localStorage.setItem('token', JSON.stringify(token));
         dispatch({ type: LOGIN_SUCCESS, payload: token });
-        history.push('/');
       })
       .catch(error => {
         dispatch({ type: LOGIN_FAILURE })
       });
   }
 
-  const logout = () => {
-    dispatch({ type: LOGOUT})
-    window.location.reload();
-  }
-
   return (
     <div>
       {authStatus.isLogged ?
         (
-          <button onClick={logout}>logout</button>
+          <Redirect to='/' />
         )
         :
         (
@@ -63,3 +56,4 @@ const Login = () => {
 export default Login;
 
 //w login success moge zrobic setToken w storage
+//zrobic link do register

@@ -41,3 +41,4 @@ function App() {
 
 export default App;
 //isLogged null, false, true
+//moge zrobic get token w dispachu
