@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+// import ChangeField from './changeField';
 
 const User = () => {
   const initialState = {
@@ -76,3 +77,5 @@ export default User;
 // Przesylac w propsach i zrobic trzy te same komponenty tak, ze sa reusable
 // Jak sie chowa to powinien byc czyszczony const handleChange = fieldName => () => {setToggleChange(prev => ({ ...prev, [fieldName]: !prev[fieldName] }) setFieldName(''););}
 // albo wszystko czysci i daje na false ecksDII
+
+//moge dac pole na required i w api to toggleChange.toggleUsername powinno byc na true

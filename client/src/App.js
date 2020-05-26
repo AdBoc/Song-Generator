@@ -16,9 +16,10 @@ function App() {
   const { dispatch } = useContext(authContext);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
     if (token) {
-      dispatch({ type: AUTHORIZE })
+      token = token.replace(/^"(.*)"$/, '$1');
+      dispatch({ type: AUTHORIZE, payload: token })
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -39,5 +40,4 @@ function App() {
 }
 
 export default App;
-
-//JESLI WYSLE W PAYLOADZIE TOKEN TO MEGE GO SETOWAC W REDUCERZE I PRZECHOWYWAC W CONTEXCIE BEZ ZABAWY W REGEXY ABY GO ZDOBYC
+//isLogged null, false, true

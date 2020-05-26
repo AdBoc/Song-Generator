@@ -1,10 +1,12 @@
 import {
     AUTHORIZE,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    LOGOUT
 } from '../constants';
 
 export const initialState = {
-    isLogged: false
+    isLogged: false,
+    token: null
 };
 
 const authReducer = (state, action) => {
@@ -12,8 +14,14 @@ const authReducer = (state, action) => {
         case AUTHORIZE:
         case LOGIN_SUCCESS:
             return {
-                ...state,
-                isLogged: true
+                isLogged: true,
+                token: action.payload
+            }
+        case LOGOUT:
+            localStorage.removeItem('token');
+            return {
+                isLogged: false,
+                token: null
             }
         default:
             return state;

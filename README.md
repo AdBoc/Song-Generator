@@ -12,6 +12,7 @@ v 0.1.1 - small change in README
 v 0.5 - added player and download button to home
 v 0.5.1 - small fixes
 v 0.5.2 - new put request to change user data
+v 0.6 - token is now taken from state, small changes in reducer, requests in home are now in sonService
 
 ToDo:
 weryfikacja pól

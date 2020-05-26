@@ -3,7 +3,7 @@ import { authContext } from '../../contexts/authContext'
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT_SUCCESS
+  LOGOUT
 } from '../../constants';
 import axios from 'axios';
 import { history } from '../../_helpers/history';
@@ -28,13 +28,12 @@ const Login = () => {
         history.push('/');
       })
       .catch(error => {
-        dispatch({ type: LOGIN_FAILURE, payload: error })
+        dispatch({ type: LOGIN_FAILURE })
       });
   }
 
   const logout = () => {
-    localStorage.removeItem('token');
-    dispatch({ type: LOGOUT_SUCCESS })
+    dispatch({ type: LOGOUT})
     window.location.reload();
   }
 
@@ -62,3 +61,5 @@ const Login = () => {
 };
 
 export default Login;
+
+//w login success moge zrobic setToken w storage
