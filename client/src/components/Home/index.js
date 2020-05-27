@@ -46,7 +46,7 @@ const Home = () => {
             </select>
           </label>
         </div>
-        <textarea onChange={(e) => setTextField(e.target.value)} value={textField} required></textarea>
+        <textarea onChange={(e) => setTextField(e.target.value)} value={textField} maxLength="50" required></textarea>
         <input type="submit" value="submit" disabled={isButtonValid() ? false : true}></input>
       </form>
 

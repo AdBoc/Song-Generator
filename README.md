@@ -15,6 +15,7 @@ v 0.5.2 - new put request to change user data
 v 0.6 - token is now taken from state, small changes in reducer, requests in home are now in sonService
 v 0.6.1 - button is not rendered if there is no song
 v 0.6.9 - moved requests to apiService.js, changed navBar, fixed update user and noSong now returns 404
+v 0.7 - fixed login and username problem
 
 ToDo:
 weryfikacja pól

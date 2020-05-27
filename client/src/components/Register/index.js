@@ -7,12 +7,12 @@ import { history } from '../../_helpers/history';
 const Register = () => {
   const { authStatus } = useContext(authContext);
   const [email, setEmail] = useState('');
-  const [username, setUser] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    apiService.register(username, email, password);
+    apiService.register(login, email, password);
     history.push('/');
   }
 
@@ -25,8 +25,8 @@ const Register = () => {
         :
         (
           <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="username" value={username}
-              onChange={(e) => setUser(e.target.value)} required />
+            <input type="text" placeholder="login" value={login}
+              onChange={(e) => setLogin(e.target.value)} required />
             <input type="text" placeholder="email" value={email}
               onChange={(e) => setEmail(e.target.value)} required />
             <input type="password" placeholder="password" value={password}

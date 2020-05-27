@@ -45,9 +45,9 @@ class ApiService {
     document.body.removeChild(link);
   }
 
-  register(username, email, password) {
+  register(login, email, password) {
     axios.post('http://localhost:2137/user/register', {
-      username,
+      login,
       email,
       password
     }).then(resposne => {
@@ -57,12 +57,12 @@ class ApiService {
     });
   }
 
-  updateUser(token, username, email, newPassword, confirmNewPassword) {
+  updateUser(token, login, email, newPassword, confirmNewPassword) {
     axios.put('http://localhost:2137/user/update', {
-      ...(email ? { email: email } : {}),
-      ...(username ? { username: username } : {}),
-      ...(newPassword ? { newPassword: newPassword } : {}),
-      ...(confirmNewPassword ? { confirmNewPassword: confirmNewPassword } : {})
+      ...(email ? { email } : {}),
+      ...(login ? { login } : {}),
+      ...(newPassword ? { newPassword } : {}),
+      ...(confirmNewPassword ? { confirmNewPassword } : {})
     }, {
       headers: {
         'Authorization': "Bearer " + token

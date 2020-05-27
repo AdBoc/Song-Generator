@@ -11,14 +11,14 @@ const User = () => {
 
   const { authStatus } = useContext(authContext);
   const [toggleChange, setToggleChange] = useState(initialState);
-  const [username, setUsername] = useState('');
+  const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    ApiService.updateUser(authStatus.token, username, email, newPassword, confirmNewPassword);
+    ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword);
   }
 
   const handleChange = fieldName => () => {
@@ -28,11 +28,11 @@ const User = () => {
   return (
     <div>
 
-      <div onClick={handleChange('toggleUsername')}>Username</div>
+      <div onClick={handleChange('toggleUsername')}>Login</div>
       {
         toggleChange.toggleUsername &&
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="user" value={username} onChange={(e) => { setUsername(e.target.value) }} />
+          <input type="text" placeholder="user" value={login} onChange={(e) => { setLogin(e.target.value) }} />
           <input type="submit" value="submit" />
         </form>
       }

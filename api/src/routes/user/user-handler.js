@@ -38,6 +38,7 @@ class UserHandlerService {
         const loginExist = !!await mongoDbService.client.model('User').findOne({ login: newUserData.login });
 
         if (loginExist) {
+          console.log('login already exits');
           return httpResponseGeneratorService.createResponse(403, 'Login already exists')
         }
 
@@ -48,6 +49,7 @@ class UserHandlerService {
         const emailExist = !!await mongoDbService.client.model('User').findOne({ login: newUserData.login });
 
         if (emailExist) {
+          console.log('email already exists');
           return httpResponseGeneratorService.createResponse(403, 'Email already exists')
         }
 
