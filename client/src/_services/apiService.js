@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class SongService {
+class ApiService {
   getSong(token) {
     return axios.get('http://localhost:2137/song', {
       headers: {
@@ -13,7 +13,7 @@ class SongService {
       return url
     }).catch(error => {
       console.log(error);
-      return {}
+      return '' //do zmiany raczej
     });
   }
 
@@ -44,7 +44,36 @@ class SongService {
     link.click();
     document.body.removeChild(link);
   }
+
+  register(username, email, password) {
+    axios.post('http://localhost:2137/user/register', {
+      username,
+      email,
+      password
+    }).then(resposne => {
+      console.log('user registered');
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
+  updateUser(token, username, email, newPassword, confirmNewPassword) {
+    axios.put('http://localhost:2137/user/update', {
+      ...(email ? { email: email } : {}),
+      ...(username ? { username: username } : {}),
+      ...(newPassword ? { newPassword: newPassword } : {}),
+      ...(confirmNewPassword ? { confirmNewPassword: confirmNewPassword } : {})
+    }, {
+      headers: {
+        'Authorization': "Bearer " + token
+      }
+    }).then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    })
+  }
 }
 
-const songService = new SongService();
-export default songService;
+const apiService = new ApiService();
+export default apiService;

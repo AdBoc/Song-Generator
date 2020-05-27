@@ -75,7 +75,6 @@ class UserHandlerService {
 
 
     } catch (error) {
-      console.log(error)
       return httpResponseGeneratorService.createResponse(500, 'Cannot update user')
     }
   }

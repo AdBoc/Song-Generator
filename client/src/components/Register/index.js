@@ -1,48 +1,35 @@
 import React, { useContext, useState } from 'react';
 import { authContext } from '../../contexts/authContext'
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE
-} from '../../constants';
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import apiService from '../../_services/apiService';
 import { history } from '../../_helpers/history';
 
 const Register = () => {
-  const { authStatus, dispatch } = useContext(authContext);
+  const { authStatus } = useContext(authContext);
   const [email, setEmail] = useState('');
   const [username, setUser] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:2137/user/register', {
-      username,
-      email,
-      password
-    })
-      .then(response => {
-        dispatch({ type: REGISTER_SUCCESS })
-        history.push('/');
-      })
-      .catch(error => {
-        dispatch({ type: REGISTER_FAILURE })
-      });
+    apiService.register(username, email, password);
+    history.push('/');
   }
 
   return (
     <div>
       {authStatus.isLogged ?
         (
-          <p> You are logged in </p>
+          <Redirect to='/' />
         )
         :
         (
           <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="email" value={email}
-              onChange={(e) => setEmail(e.target.value)} required />
             <input type="text" placeholder="username" value={username}
               onChange={(e) => setUser(e.target.value)} required />
-            <input type="text" placeholder="password" value={password}
+            <input type="text" placeholder="email" value={email}
+              onChange={(e) => setEmail(e.target.value)} required />
+            <input type="password" placeholder="password" value={password}
               onChange={(e) => setPassword(e.target.value)} required />
             <input type="submit" value="submit" />
           </form>

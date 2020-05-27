@@ -1,17 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { authContext } from '../../contexts/authContext';
-import songService from '../../_services/songService';
+import ApiService from '../../_services/apiService';
 
 const Home = () => {
   const { authStatus } = useContext(authContext);
-  const [song, setSong] = useState(null);
-  const [textField, setTextField] = useState('');
+  const [song, setSong] = useState({});
+  const [textField, setTextField] = useState('wchodzę do kuchni matka stoi, stary zaraz w łeb jej przypierdoli');
   const [language, setLanguage] = useState('pl');
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (authStatus.token)
-      songService.getSong(authStatus.token).then(response => { setSong(response) }).catch(error => console.log(error));
+      ApiService.getSong(authStatus.token).then(response => { setSong(response) }).catch(error => console.log(error));
   }, [authStatus.token]);
 
   const handleSubmit = (e) => {
@@ -19,12 +19,12 @@ const Home = () => {
 
     if (authStatus.token) {
       setLoading(true);
-      songService.generateNewSong(authStatus.token, textField, language).then(response => { setSong(response); setLoading(false) }).catch(error => console.log(error));
+      ApiService.generateNewSong(authStatus.token, textField, language).then(response => { setSong(response); setLoading(false) }).catch(error => console.log(error));
     } //co jesli reponsem jest error w promise
   }
 
   const handleDownload = () => {
-    songService.downloadSong(song);
+    ApiService.downloadSong(song);
   }
 
   const isButtonValid = () => {
@@ -33,8 +33,7 @@ const Home = () => {
 
   return (
     <div>
-
-      {authStatus.isLogged ? null : <div>You must be logged in to make api request</div>}
+      {authStatus.isLogged ? null : <div style={{ color: "red" }}>You must be logged in to make api request</div>}
 
       <p>Welcome to GoBarbra</p>
 
@@ -54,7 +53,6 @@ const Home = () => {
       <audio controls src={song} type="audio/mp3" />
       {isLoading && <div>Loading...</div>}
       {song ? <button onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
-
     </div >
   )
 }

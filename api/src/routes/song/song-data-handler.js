@@ -33,13 +33,12 @@ class SongDataHandler {
             const recordTitle = song ? `${userId}` : '';
 
             if (!recordTitle || !fs.existsSync(`./audio/${recordTitle.replace(/\s/g, '')}.mp3`)) {
-                return { code: 404, message: 'Song not found' };
+                return httpResponseGeneratorService.createResponse(404, 'Song was not found');
             }
 
             return httpResponseGeneratorService.createResponse(200);
 
         } catch (error) {
-            console.log(error);
             return httpResponseGeneratorService.createResponse(500, 'Cannot get song');
         }
     }

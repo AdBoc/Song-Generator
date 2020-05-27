@@ -1,38 +1,24 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-// import ChangeField from './changeField';
+import React, { useState, useContext } from 'react';
+import { authContext } from '../../contexts/authContext';
+import ApiService from '../../_services/apiService';
 
 const User = () => {
   const initialState = {
     toggleUsername: false,
     togglePassword: false,
     toggleEmail: false
-  }
+  };
 
+  const { authStatus } = useContext(authContext);
   const [toggleChange, setToggleChange] = useState(initialState);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    let token = localStorage.getItem('token');
-    if (token) token = token.replace(/^"(.*)"$/, '$1');
-
-    axios.put('http://localhost:2137/user/update', {
-      ...(username ? { username: username } : {}),
-      ...(email ? { email: email } : {}),
-      ...(password ? { password: password } : {})
-    }, {
-      headers: {
-        'Authorization': "Bearer " + token
-      }
-    }).then(response => {
-      console.log('put was send!');
-    }).catch(error => {
-      console.log(error);
-    })
+    ApiService.updateUser(authStatus.token, username, email, newPassword, confirmNewPassword);
   }
 
   const handleChange = fieldName => () => {
@@ -64,7 +50,9 @@ const User = () => {
       {
         toggleChange.togglePassword &&
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="password" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+          <input type="password" placeholder="new password" value={newPassword} onChange={(e) => { setNewPassword(e.target.value) }} />
+          <input type="submit" value="submit" />
+          <input type="password" placeholder="confirm new password" value={confirmNewPassword} onChange={(e) => { setConfirmNewPassword(e.target.value) }} />
           <input type="submit" value="submit" />
         </form>
       }
