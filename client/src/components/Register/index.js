@@ -3,6 +3,7 @@ import { authContext } from '../../contexts/authContext'
 import { Redirect } from 'react-router-dom';
 import apiService from '../../_services/apiService';
 import { history } from '../../_helpers/history';
+import '../Login/login.scss';
 
 const Register = () => {
   const { authStatus } = useContext(authContext);
@@ -17,21 +18,22 @@ const Register = () => {
   }
 
   return (
-    <div>
+    <div className="login">
       {authStatus.isLogged ?
         (
           <Redirect to='/' />
         )
         :
         (
-          <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="login" value={login}
+          <form className="login--loginForm" onSubmit={handleSubmit}>
+            <p className="login--mainText">Create account</p>
+            <input className="login--loginForm__field" type="text" placeholder="login" value={login}
               onChange={(e) => setLogin(e.target.value)} required />
-            <input type="text" placeholder="email" value={email}
+            <input className="login--loginForm__field" type="text" placeholder="email" value={email}
               onChange={(e) => setEmail(e.target.value)} required />
-            <input type="password" placeholder="password" value={password}
+            <input className="login--loginForm__field" type="password" placeholder="password" value={password}
               onChange={(e) => setPassword(e.target.value)} required />
-            <input type="submit" value="submit" />
+            <input className="login--loginForm__submit" type="submit" value="submit" />
           </form>
         )
       }

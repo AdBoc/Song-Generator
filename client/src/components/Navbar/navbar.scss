@@ -1,0 +1,15 @@
+.navbar {
+  background-color: #afaa9a;
+}
+
+.navbar--flexbox {
+  display: flex;
+
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.navbar--item {
+  color: white;
+  padding: 1rem;
+}

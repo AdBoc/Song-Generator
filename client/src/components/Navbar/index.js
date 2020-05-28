@@ -4,6 +4,7 @@ import {
   LOGOUT
 } from '../../constants';
 import { authContext } from '../../contexts/authContext';
+import './navbar.scss';
 
 const Navbar = () => {
   const { authStatus, dispatch } = useContext(authContext);
@@ -14,24 +15,21 @@ const Navbar = () => {
   }
 
   return (
-    <div>
-      <ul>
-        <Link to={'/'}><li>Home</li></Link>
+    <div className="navbar">
+      <ul className="navbar--flexbox">
+        <Link to={'/'}><li className="navbar--item">Home</li></Link>
         {authStatus.isLogged ?
           (
             <>
-              <Link to={'/user'}><li>User</li></Link>
-              <li onClick={logout}>Logout</li>
+              <Link to={'/user'}><li className="navbar--item">User</li></Link>
+              <li className="navbar--item" onClick={logout}>Logout</li>
             </>
           ) : (
-            <>
-              <Link to={'/register'}><li>Register</li></Link>
-              <Link to={'/login'}><li>Login</li></Link>
-            </>
+            <Link to={'/login'}><li className="navbar--item" >Login</li></Link>
           )
         }
       </ul>
-    </div>
+    </div >
   )
 };
 

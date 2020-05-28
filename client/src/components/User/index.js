@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { authContext } from '../../contexts/authContext';
 import ApiService from '../../_services/apiService';
+import './user.scss';
 
 const User = () => {
   const initialState = {
@@ -26,37 +27,30 @@ const User = () => {
   }
 
   return (
-    <div>
-
-      <div onClick={handleChange('toggleUsername')}>Login</div>
-      {
-        toggleChange.toggleUsername &&
-        <form onSubmit={handleSubmit}>
+    <div className="user">
+      <form onSubmit={handleSubmit}>
+        <div className="user--form__field" onClick={handleChange('toggleUsername')}>Login</div>
+        {
+          toggleChange.toggleUsername &&
           <input type="text" placeholder="user" value={login} onChange={(e) => { setLogin(e.target.value) }} />
-          <input type="submit" value="submit" />
-        </form>
-      }
+        }
 
-      <div onClick={handleChange('toggleEmail')}>Email</div>
-      {
-        toggleChange.toggleEmail &&
-        <form onSubmit={handleSubmit}>
+        <div className="user--form__field" onClick={handleChange('toggleEmail')}>Email</div>
+        {
+          toggleChange.toggleEmail &&
           <input type="text" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
-          <input type="submit" value="submit" />
-        </form>
-      }
+        }
 
-      <div onClick={handleChange('togglePassword')}>Password</div>
-      {
-        toggleChange.togglePassword &&
-        <form onSubmit={handleSubmit}>
-          <input type="password" placeholder="new password" value={newPassword} onChange={(e) => { setNewPassword(e.target.value) }} />
-          <input type="submit" value="submit" />
-          <input type="password" placeholder="confirm new password" value={confirmNewPassword} onChange={(e) => { setConfirmNewPassword(e.target.value) }} />
-          <input type="submit" value="submit" />
-        </form>
-      }
-
+        <div className="user--form__field" onClick={handleChange('togglePassword')}>Password</div>
+        {
+          toggleChange.togglePassword &&
+          <>
+            <input type="password" placeholder="new password" value={newPassword} onChange={(e) => { setNewPassword(e.target.value) }} />
+            <input type="password" placeholder="confirm new password" value={confirmNewPassword} onChange={(e) => { setConfirmNewPassword(e.target.value) }} />
+          </>
+        }
+        <input className="user--form__submit" type="submit" value="submit" />
+      </form>
     </div>
   )
 }

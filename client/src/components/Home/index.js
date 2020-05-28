@@ -1,13 +1,16 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { authContext } from '../../contexts/authContext';
 import ApiService from '../../_services/apiService';
+import './home.scss';
 
 const Home = () => {
   const { authStatus } = useContext(authContext);
-  const [song, setSong] = useState({});
-  const [textField, setTextField] = useState('wchodzę do kuchni matka stoi, stary zaraz w łeb jej przypierdoli');
+  const [song, setSong] = useState(null);
+  const [textField, setTextField] = useState('Gernerate new song');
   const [language, setLanguage] = useState('pl');
   const [isLoading, setLoading] = useState(false);
+
+  const [charactersLeft, setCharactersLeft] = useState(32);
 
   useEffect(() => {
     if (authStatus.token)
@@ -31,30 +34,39 @@ const Home = () => {
     return authStatus.isLogged && !isLoading
   }
 
+  const maxTextField = (e) => {
+    setTextField(e.target.value);
+    setCharactersLeft(50 - e.target.value.length);
+  }
+
   return (
-    <div>
-      {authStatus.isLogged ? null : <div style={{ color: "red" }}>You must be logged in to make api request</div>}
+    <div className="home">
+      {authStatus.isLogged ? null : <div className="home--isLoggedError">You must be logged in to make api request</div>}
 
-      <p>Welcome to GoBarbra</p>
+      <p className="home--title">GoBarbra</p>
+      <p className="home--subtitle">create song with custom lyrics</p>
 
-      <form onSubmit={handleSubmit}>
+      <form className="home--form" onSubmit={handleSubmit}>
         <div>
-          <label>
-            <select name="language" value={language} onChange={(e) => { setLanguage(e.target.value) }}>
+          <label> Pick language of your song:
+            <select className="home--form__select" name="language" value={language} onChange={(e) => { setLanguage(e.target.value) }}>
               <option value="pl">Polish</option>
               <option value="en">English</option>
+              <option value="ja">Japanesee</option>
             </select>
           </label>
         </div>
-        <textarea onChange={(e) => setTextField(e.target.value)} value={textField} maxLength="50" required></textarea>
-        <input type="submit" value="submit" disabled={isButtonValid() ? false : true}></input>
+        <textarea className="home--form__textarea" onChange={maxTextField} value={textField} maxLength="50" required></textarea>
+        <p className={charactersLeft < 10 ? "home--form__characterLimit__limit" : "home--form__characterLimit"}>Character limit: {charactersLeft}</p>
+        <input className="home--form__submit" type="submit" value="Submit" disabled={isButtonValid() ? false : true}></input>
       </form>
 
-      <audio controls src={song} type="audio/mp3" />
+      <audio className="home--audioPlayer" controls src={song} type="audio/mp3" />
       {isLoading && <div>Loading...</div>}
-      {song ? <button onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
+      {song ? <button className="home--form__submit" onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
     </div >
   )
 }
 
 export default Home;
+//pusty request??

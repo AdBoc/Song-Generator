@@ -5,7 +5,8 @@ import {
   LOGIN_FAILURE
 } from '../../constants';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import './login.scss'
 
 const Login = () => {
   const { authStatus, dispatch } = useContext(authContext);
@@ -29,20 +30,24 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className="login">
       {authStatus.isLogged ?
         (
           <Redirect to='/' />
         )
         :
         (
-          <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="email" value={email}
-              onChange={(e) => setEmail(e.target.value)} required />
-            <input type="password" placeholder="password" value={password}
-              onChange={(e) => setPassword(e.target.value)} required />
-            <input type="submit" value="submit" />
-          </form>
+          <div className="login--loginForm">
+            <p className="login--mainText">Login</p>
+            <form onSubmit={handleSubmit}>
+              <input className="login--loginForm__field" type="text" placeholder="email" value={email}
+                onChange={(e) => setEmail(e.target.value)} required />
+              <input className="login--loginForm__field" type="password" placeholder="password" value={password}
+                onChange={(e) => setPassword(e.target.value)} required />
+              <input className="login--loginForm__submit" type="submit" value="submit" />
+            </form>
+            <p className="login--register">Not registered? <Link to={'/register'}>Create an account</Link></p>
+          </div>
         )
       }
     </div >

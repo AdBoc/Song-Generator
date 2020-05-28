@@ -16,6 +16,7 @@ v 0.6 - token is now taken from state, small changes in reducer, requests in hom
 v 0.6.1 - button is not rendered if there is no song
 v 0.6.9 - moved requests to apiService.js, changed navBar, fixed update user and noSong now returns 404
 v 0.7 - fixed login and username problem
+v 0.7.5 - added css and max-length counter to textField
 
 ToDo:
 weryfikacja pól

@@ -12,6 +12,8 @@ import { PrivateRoute } from './_helpers/privateRoute';
 import { authContext } from './contexts/authContext';
 import { AUTHORIZE } from './constants';
 
+import './App.css';
+
 function App() {
   const { dispatch } = useContext(authContext);
 

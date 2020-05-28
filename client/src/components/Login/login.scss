@@ -1,0 +1,45 @@
+.login {
+  background-image: linear-gradient(
+    to top,
+    #fdf6e3,
+    #fafafa
+  ); //linear-gradient(to bottom right, red, yellow);
+  height: 100vh;
+  font-family: Lato;
+  font-size: 1.25rem;
+  text-align: center;
+  padding-top: 5rem;
+}
+
+.login--loginForm {
+  margin: 0 auto 0 auto;
+  padding: 0.5rem;
+  border: 1px solid #afaa9a;
+  width: 80vw;
+  background-color: white;
+}
+
+.login--loginForm__field {
+  margin: 0.5rem;
+  padding: 0.25rem;
+  font-size: 1rem;
+}
+
+.login--loginForm__submit {
+  display: block;
+  margin: 0.5rem auto 0 auto;
+  border: 0px solid black;
+  border-radius: 0.2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #afaa9a;
+  color: white;
+}
+
+.login--register {
+  margin: 0.75rem 0 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.login--mainText {
+  padding: 1rem;
+}
