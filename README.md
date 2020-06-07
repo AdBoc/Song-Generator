@@ -19,6 +19,7 @@ v 0.6.1 - button is not rendered if there is no song
 v 0.6.9 - moved requests to apiService.js, changed navBar, fixed update user and noSong now returns 404
 v 0.7 - fixed login and username problem
 v 0.7.5 - added css and max-length counter to textField
+v 0.7.9 - added simple media queries, moved setToken to login reducer, moved login to apiService, added Errors that login or email is already taken,  
 
 ToDo:
 weryfikacja pol
