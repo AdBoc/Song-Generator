@@ -81,7 +81,18 @@ class UserHandlerService {
     }
   }
 
-
+  async info(userData) {
+    try {
+      const existingUser = await mongoDbService.client.model('User').findOne({ email: userData.email, login: userData.login });
+      const user = {
+        email: existingUser.email,
+        login: existingUser.login
+      }
+      return httpResponseGeneratorService.createResponse(200, user);
+    } catch (error) {
+      return httpResponseGeneratorService.createResponse(404, 'User not found');
+    }
+  }
 
 }
 

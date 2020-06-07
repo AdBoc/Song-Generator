@@ -11,5 +11,22 @@
       padding: 1rem;
       cursor: pointer;
     }
+
+    &__navbarFlex {
+      padding: 0 1rem;
+
+      &:first-child {
+        margin-right: auto;
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        background-color: #9c9785;
+      }
+    }
   }
 }

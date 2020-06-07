@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { authContext } from '../../contexts/authContext';
 import ApiService from '../../_services/apiService';
 import './user.scss';
@@ -18,9 +18,17 @@ const User = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [error, setError] = useState('');
 
+  const [userData, setUserData] = useState('');
+
+
+  useEffect(() => {
+    if (authStatus.token)
+      ApiService.getUser(authStatus.token).then(response => { setUserData(response) });
+  }, [authStatus.token]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword).then(response => response ==='Email or Username already exists' ? setError(response) : setError(''));
+    ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword).then(response => response === 'Email or Username already exists' ? setError(response) : setError(''));
   }
   const handleChange = fieldName => () => {
     setToggleChange(prev => ({ ...prev, [fieldName]: !prev[fieldName] }));
@@ -30,13 +38,13 @@ const User = () => {
     <div className="user">
       <p className="user__mainText"> Change multiple elements at the same time by clicking on fields</p>
       <form className="user__form" onSubmit={handleSubmit}>
-        <div className="user__form--field" onClick={handleChange('toggleUsername')}>Login</div>
+        <div className="user__form--field" onClick={handleChange('toggleUsername')}>Login: {userData.login}</div>
         {
           toggleChange.toggleUsername &&
           <input className="user__form--inputField" type="text" placeholder="user" value={login} onChange={(e) => { setLogin(e.target.value) }} />
         }
 
-        <div className="user__form--field" onClick={handleChange('toggleEmail')}>Email</div>
+        <div className="user__form--field" onClick={handleChange('toggleEmail')}>Email: {userData.email}</div>
         {
           toggleChange.toggleEmail &&
           <input className="user__form--inputField" type="text" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />

@@ -29,6 +29,7 @@ app.post('/song/add', passport.authenticate('jwt', { session: false }), routesHa
 app.post('/user/register', routesHandler.registerUser)
 app.post('/user/login', routesHandler.loginUser)
 app.put('/user/update', passport.authenticate('jwt', { session: false }), routesHandler.updateUser)
+app.get('/user/me', passport.authenticate('jwt', { session: false }), routesHandler.userInfo)
 app.get('/*', routesHandler.notFound)
 
 app.listen(2137, () => {

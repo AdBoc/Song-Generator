@@ -17,17 +17,17 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <ul className="navbar__flex">
-        <Link to={'/'}><li className="navbar__flex--item">Home</li></Link>
+        <Link className="navbar__flex__navbarFlex" to={'/'}><li className="navbar__flex--item">Home</li></Link>
         {authStatus.isLogged ?
           (
             <>
-              <Link to={'/user'}><li className="navbar__flex--item">User</li></Link>
-              <li className="navbar__flex--item" onClick={logout}>Logout</li>
+              <Link className="navbar__flex__navbarFlex" to={'/user'}><li className="navbar__flex--item">User</li></Link>
+              <div className="navbar__flex__navbarFlex"><li className="navbar__flex--item" onClick={logout}>Logout</li></div>
             </>
           ) : (
             <>
-              <Link to={'/register'}><li className="navbar__flex--item">Register</li></Link>
-              <Link to={'/login'}><li className="navbar__flex--item">Login</li></Link>
+              <Link className="navbar__flex__navbarFlex" to={'/register'}><li className="navbar__flex--item">Register</li></Link>
+              <Link className="navbar__flex__navbarFlex" to={'/login'}><li className="navbar__flex--item">Login</li></Link>
             </>
           )
         }

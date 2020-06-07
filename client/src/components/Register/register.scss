@@ -38,6 +38,10 @@
       background-color: #afaa9a;
       color: white;
       cursor: pointer;
+
+      &:hover {
+        background-color: #9c9785;
+      }
     }
 
     &--error {

@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { authContext } from '../../contexts/authContext';
 import ApiService from '../../_services/apiService';
 import './home.scss';
 
 const Home = () => {
+  let _isMounted = useRef(true);
   const { authStatus } = useContext(authContext);
   const [song, setSong] = useState(null);
   const [textField, setTextField] = useState('Gernerate new song');
@@ -17,12 +18,20 @@ const Home = () => {
       ApiService.getSong(authStatus.token).then(response => { setSong(response) }).catch(error => console.log('spawn SturmTiger'));
   }, [authStatus.token]);
 
+  useEffect(() => {
+    return () => {
+      console.log('unmounting');
+      _isMounted.current = false
+      console.log(_isMounted.current);
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (authStatus.token) {
       setLoading(true);
-      ApiService.generateNewSong(authStatus.token, textField, language).then(response => { setSong(response); setLoading(false) }).catch(error => console.log('spawn SturmTiger'));
+      ApiService.generateNewSong(authStatus.token, textField, language, _isMounted.current).then(response => { if (_isMounted.current) { setSong(response); setLoading(false) } else { return null; } });
     } //co jesli reponsem jest error w promise
   }
 
@@ -62,7 +71,7 @@ const Home = () => {
       </form>
 
       <audio className="home__audioPlayer" controls src={song} type="audio/mp3" />
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <div className="home__form--loading">Loading...</div>}
       {song ? <button className="home__form__submit" onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
     </div >
   )

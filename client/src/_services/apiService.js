@@ -99,6 +99,21 @@ class ApiService {
         return null;
       });
   }
+
+  getUser(token) {
+    return axios.get('http://localhost:2137/user/me', {
+      headers: {
+        'Authorization': "Bearer " + token
+      }
+    })
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+        return null;
+      })
+  }
 }
 
 const apiService = new ApiService();

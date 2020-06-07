@@ -39,10 +39,14 @@ class RoutesHandler {
         response.status(updateUserResult.status).send(updateUserResult.message);
     }
 
+    async userInfo(request, response) {
+        const userInformation = await userHandlerService.info(request.user, request.body);
+        response.status(userInformation.status).send(userInformation.message);
+    }
+
     async notFound(response) {
         response.status(404).send('Page not found');
     }
-
 }
 
 const routesHandler = new RoutesHandler();
