@@ -1,0 +1,61 @@
+.register {
+  background-image: linear-gradient(
+    to top,
+    #fdf6e3,
+    #fafafa
+  ); //linear-gradient(to bottom right, red, yellow);
+  height: 100vh;
+  font-family: Lato;
+  font-size: 1.25rem;
+  text-align: center;
+  padding-top: 5rem;
+
+  &__mainText {
+    padding: 1rem;
+  }
+
+  &__registerForm {
+    margin: 0 auto 0 auto;
+    padding: 0.5rem;
+    border: 1px solid #afaa9a;
+    width: 80vw;
+    background-color: white;
+
+    &--field {
+      display: block;
+      margin: 0.5rem auto 0.5rem auto;
+      padding: 0.25rem;
+      font-size: 1rem;
+      min-width: 14rem;
+    }
+
+    &--submit {
+      display: block;
+      margin: 1rem auto 0.5rem auto;
+      border: 0px solid black;
+      border-radius: 0.2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #afaa9a;
+      color: white;
+      cursor: pointer;
+    }
+
+    &--error {
+      background-color: rgba($color: #ef0000, $alpha: 0.2);
+      color: red;
+      border: 1px solid red;
+      padding: 0.5rem;
+      margin: 1rem auto;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .register__registerForm {
+    min-width: 2vw;
+    width: 25vw;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+}

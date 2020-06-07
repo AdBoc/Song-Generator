@@ -16,40 +16,42 @@ const User = () => {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword);
+    ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword).then(response => response ==='Email or Username already exists' ? setError(response) : setError(''));
   }
-
   const handleChange = fieldName => () => {
     setToggleChange(prev => ({ ...prev, [fieldName]: !prev[fieldName] }));
   }
 
   return (
     <div className="user">
-      <form onSubmit={handleSubmit}>
-        <div className="user--form__field" onClick={handleChange('toggleUsername')}>Login</div>
+      <p className="user__mainText"> Change multiple elements at the same time by clicking on fields</p>
+      <form className="user__form" onSubmit={handleSubmit}>
+        <div className="user__form--field" onClick={handleChange('toggleUsername')}>Login</div>
         {
           toggleChange.toggleUsername &&
-          <input type="text" placeholder="user" value={login} onChange={(e) => { setLogin(e.target.value) }} />
+          <input className="user__form--inputField" type="text" placeholder="user" value={login} onChange={(e) => { setLogin(e.target.value) }} />
         }
 
-        <div className="user--form__field" onClick={handleChange('toggleEmail')}>Email</div>
+        <div className="user__form--field" onClick={handleChange('toggleEmail')}>Email</div>
         {
           toggleChange.toggleEmail &&
-          <input type="text" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+          <input className="user__form--inputField" type="text" placeholder="email" value={email} onChange={(e) => { setEmail(e.target.value) }} />
         }
 
-        <div className="user--form__field" onClick={handleChange('togglePassword')}>Password</div>
+        <div className="user__form--field" onClick={handleChange('togglePassword')}>Password</div>
         {
           toggleChange.togglePassword &&
           <>
-            <input type="password" placeholder="new password" value={newPassword} onChange={(e) => { setNewPassword(e.target.value) }} />
-            <input type="password" placeholder="confirm new password" value={confirmNewPassword} onChange={(e) => { setConfirmNewPassword(e.target.value) }} />
+            <input className="user__form--inputField" type="password" placeholder="new password" value={newPassword} onChange={(e) => { setNewPassword(e.target.value) }} />
+            <input className="user__form--inputField" type="password" placeholder="confirm new password" value={confirmNewPassword} onChange={(e) => { setConfirmNewPassword(e.target.value) }} />
           </>
         }
-        <input className="user--form__submit" type="submit" value="submit" />
+        {error && <p>error</p>}
+        <input className="user__form--submit" type="submit" value="submit" />
       </form>
     </div>
   )

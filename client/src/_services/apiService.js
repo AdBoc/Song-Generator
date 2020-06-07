@@ -13,6 +13,10 @@ class ApiService {
       return url
     }).catch(error => {
       console.log(error);
+      if (error.message === 'Request failed with status code 401') {
+        localStorage.clear();
+        window.location.reload(true);
+      }
       return '' //do zmiany raczej
     });
   }
@@ -46,19 +50,22 @@ class ApiService {
   }
 
   register(login, email, password) {
-    axios.post('http://localhost:2137/user/register', {
+    return axios.post('http://localhost:2137/user/register', {
       login,
       email,
       password
     }).then(resposne => {
       console.log('user registered');
+      return resposne;
     }).catch(error => {
-      console.log(error);
+      if (error.message === 'Request failed with status code 403')
+        return 'Email or Username already exists';
+      return error;
     });
   }
 
   updateUser(token, login, email, newPassword, confirmNewPassword) {
-    axios.put('http://localhost:2137/user/update', {
+    return axios.put('http://localhost:2137/user/update', {
       ...(email ? { email } : {}),
       ...(login ? { login } : {}),
       ...(newPassword ? { newPassword } : {}),
@@ -69,9 +76,28 @@ class ApiService {
       }
     }).then(response => {
       console.log(response);
+      return response;
     }).catch(error => {
       console.log(error);
+      if (error.message === 'Request failed with status code 403')
+        return 'Email or Username already exists';
+      return error;
     })
+  }
+
+  login(email, password) {
+    return axios.post('http://localhost:2137/user/login', {
+      email,
+      password
+    })
+      .then(response => {
+        const token = response.data.token
+        return token;
+      })
+      .catch(error => {
+        console.log(error);
+        return null;
+      });
   }
 }
 

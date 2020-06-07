@@ -3,37 +3,38 @@ import { authContext } from '../../contexts/authContext'
 import { Redirect } from 'react-router-dom';
 import apiService from '../../_services/apiService';
 import { history } from '../../_helpers/history';
-import '../Login/login.scss';
+import './register.scss';
 
 const Register = () => {
   const { authStatus } = useContext(authContext);
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    apiService.register(login, email, password);
-    history.push('/');
+    apiService.register(login, email, password).then(response => response === 'Email or Username already exists' ? setError(response) : history.push('/login'));
   }
 
   return (
-    <div className="login">
+    <div className="register">
       {authStatus.isLogged ?
         (
-          <Redirect to='/' />
+          <Redirect to='/login' />
         )
         :
         (
-          <form className="login--loginForm" onSubmit={handleSubmit}>
-            <p className="login--mainText">Create account</p>
-            <input className="login--loginForm__field" type="text" placeholder="login" value={login}
+          <form className="register__registerForm" onSubmit={handleSubmit}>
+            <p className="register__mainText">Create account</p>
+            <input className="register__registerForm--field" type="text" placeholder="login" value={login}
               onChange={(e) => setLogin(e.target.value)} required />
-            <input className="login--loginForm__field" type="text" placeholder="email" value={email}
+            <input className="register__registerForm--field" type="text" placeholder="email" value={email}
               onChange={(e) => setEmail(e.target.value)} required />
-            <input className="login--loginForm__field" type="password" placeholder="password" value={password}
+            <input className="register__registerForm--field" type="password" placeholder="password" value={password}
               onChange={(e) => setPassword(e.target.value)} required />
-            <input className="login--loginForm__submit" type="submit" value="submit" />
+            {error && <p className="register__registerForm--error">{error}</p>}
+            <input className="register__registerForm--submit" type="submit" value="submit" />
           </form>
         )
       }
@@ -42,4 +43,3 @@ const Register = () => {
 };
 
 export default Register;
-//ZORBIC PAYLOAD Z ERROR dispatch({ type: REGISTER_FAILURE, payload: error })

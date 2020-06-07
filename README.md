@@ -1,3 +1,5 @@
+Walidacja na forncie nie zapewnia bezpiecznstwa calej apki!
+
 CODE MADE FOR THIS PROJECT IS A HUGE OVERKILL
 Everything can be done in very simplier way but then i would've learn that much about hooks
 
@@ -19,6 +21,16 @@ v 0.7 - fixed login and username problem
 v 0.7.5 - added css and max-length counter to textField
 
 ToDo:
-weryfikacja pól
-cancelling requests 
+weryfikacja pol
+cancelling requests
+api zwraca dane uzytkownika dla usera (nowy kod dla user)
+dark mode
 
+jeden button jest napisany kilka razy, kolory i zmienne mozna gdzies trzymac
+Jesli jest 401 unauthorized to sprawdza czy jest token lub robi logout (w api axios post w przypadku catcha z 401 jest czyszczenie storage)
+Jak odpowiedzia jest error w addnewSong to DonwloadButton nie powinien sie pojawiac albo dzialac
+
+ZŁY KOD:
+Errory z backendu sa console logowane
+localStorage.clear(); i window.location.reload(true); znajdujacy sie w apiService
+history.push('/') w register

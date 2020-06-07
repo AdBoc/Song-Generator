@@ -4,9 +4,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE
 } from '../../constants';
-import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
-import './login.scss'
+import ApiService from '../../_services/apiService';
+import './login.scss';
 
 const Login = () => {
   const { authStatus, dispatch } = useContext(authContext);
@@ -15,18 +15,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:2137/user/login', {
-      email,
-      password
-    })
-      .then(response => {
-        const token = response.data.token
-        localStorage.setItem('token', JSON.stringify(token));
-        dispatch({ type: LOGIN_SUCCESS, payload: token });
-      })
-      .catch(error => {
-        dispatch({ type: LOGIN_FAILURE })
-      });
+    ApiService.login(email, password).then(token => token ? dispatch({ type: LOGIN_SUCCESS, payload: token }) : dispatch({ type: LOGIN_FAILURE }));
   }
 
   return (
@@ -37,16 +26,16 @@ const Login = () => {
         )
         :
         (
-          <div className="login--loginForm">
-            <p className="login--mainText">Login</p>
+          <div className="login__loginForm">
+            <p className="login__mainText">Login</p>
             <form onSubmit={handleSubmit}>
-              <input className="login--loginForm__field" type="text" placeholder="email" value={email}
+              <input className="login__loginForm--field" type="text" placeholder="email" value={email}
                 onChange={(e) => setEmail(e.target.value)} required />
-              <input className="login--loginForm__field" type="password" placeholder="password" value={password}
+              <input className="login__loginForm--field" type="password" placeholder="password" value={password}
                 onChange={(e) => setPassword(e.target.value)} required />
-              <input className="login--loginForm__submit" type="submit" value="submit" />
+              <input className="login__loginForm--submit" type="submit" value="submit" />
             </form>
-            <p className="login--register">Not registered? <Link to={'/register'}>Create an account</Link></p>
+            <p className="login__register">Not registered? <Link to={'/register'}>Create an account</Link></p>
           </div>
         )
       }
@@ -55,5 +44,3 @@ const Login = () => {
 };
 
 export default Login;
-//w login success moge zrobic setToken w storage
-//zrobic link do register

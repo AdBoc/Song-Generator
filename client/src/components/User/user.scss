@@ -8,19 +8,46 @@
   font-family: Lato;
   font-size: 1.25rem;
   text-align: center;
+
+  &__mainText {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  &__form {
+    margin: 0 auto 0 auto;
+    padding: 0.5rem;
+    border: 1px solid #afaa9a;
+    width: 80vw;
+    background-color: white;
+
+    &--field {
+      padding: 1rem;
+      cursor: pointer;
+    }
+
+    &--inputField {
+      display: block;
+      margin: auto;
+    }
+
+    &--submit {
+      display: block;
+      margin: 2rem auto 2rem auto;
+      border: 0px solid black;
+      border-radius: 0.2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #afaa9a;
+      color: white;
+      cursor: pointer;
+    }
+  }
 }
 
-.user--form__field {
-  text-align: left;
-  padding: 1rem;
+@media screen and (min-width: 960px) {
+  .user__form {
+    width: 25vw;
+  }
 }
 
-.user--form__submit {
-  display: block;
-  margin: 2rem auto 2rem auto;
-  border: 0px solid black;
-  border-radius: 0.2rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #afaa9a;
-  color: white;
-}
+@media screen and (min-width: 1200px) {}

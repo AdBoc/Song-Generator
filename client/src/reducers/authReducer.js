@@ -13,6 +13,7 @@ const authReducer = (state, action) => {
     switch (action.type) {
         case AUTHORIZE:
         case LOGIN_SUCCESS:
+            localStorage.setItem('token', JSON.stringify(action.payload));
             return {
                 isLogged: true,
                 token: action.payload

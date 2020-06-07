@@ -1,15 +1,15 @@
 .navbar {
   background-color: #afaa9a;
-}
 
-.navbar--flexbox {
-  display: flex;
+  &__flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.navbar--item {
-  color: white;
-  padding: 1rem;
+    &--item {
+      color: white;
+      padding: 1rem;
+      cursor: pointer;
+    }
+  }
 }

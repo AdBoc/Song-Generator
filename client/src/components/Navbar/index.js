@@ -16,16 +16,19 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <ul className="navbar--flexbox">
-        <Link to={'/'}><li className="navbar--item">Home</li></Link>
+      <ul className="navbar__flex">
+        <Link to={'/'}><li className="navbar__flex--item">Home</li></Link>
         {authStatus.isLogged ?
           (
             <>
-              <Link to={'/user'}><li className="navbar--item">User</li></Link>
-              <li className="navbar--item" onClick={logout}>Logout</li>
+              <Link to={'/user'}><li className="navbar__flex--item">User</li></Link>
+              <li className="navbar__flex--item" onClick={logout}>Logout</li>
             </>
           ) : (
-            <Link to={'/login'}><li className="navbar--item" >Login</li></Link>
+            <>
+              <Link to={'/register'}><li className="navbar__flex--item">Register</li></Link>
+              <Link to={'/login'}><li className="navbar__flex--item">Login</li></Link>
+            </>
           )
         }
       </ul>

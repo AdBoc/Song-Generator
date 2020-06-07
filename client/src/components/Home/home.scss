@@ -8,69 +8,78 @@
   text-align: center;
   font-family: Lato;
   padding-top: 1.5rem;
+
+  &__isLoggedError {
+    background-color: rgba($color: #ef0000, $alpha: 0.2);
+    color: red;
+    border: 1px solid red;
+    padding: 0.5rem;
+    width: 70vw;
+    margin: 0 auto 0 auto;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    padding-top: 1.5rem;
+  }
+
+  &__subtitle {
+    margin-top: 0.5rem;
+  }
+
+  &__form {
+    margin-top: 3rem;
+
+    &__textarea {
+      resize: none;
+      width: 15rem;
+      height: 4rem;
+      margin: 2rem 0 0 0;
+    }
+
+    &__characterLimit {
+      max-width: 15rem;
+      margin: 0 auto 1rem auto;
+      font-size: 0.75rem;
+      text-align: right;
+
+      &--limit {
+        max-width: 15rem;
+        margin: 0 auto 1rem auto;
+        font-size: 0.75rem;
+        text-align: right;
+        color: red;
+      }
+    }
+
+    &__submit {
+      display: block;
+      margin: 0 auto 1rem auto;
+      border: 0px solid black;
+      border-radius: 0.2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #afaa9a;
+      color: white;
+      cursor: pointer;
+    }
+
+    &__select {
+      margin: 0 0 0 0.5rem;
+    }
+  }
+
+  &__audioPlayer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 
-.home--isLoggedError {
-  background-color: rgba($color: #ef0000, $alpha: 0.2);
-  color: red;
-  border: 1px solid red;
-  padding: 0.5rem;
-  width: 70vw;
-  margin: 0 auto 0 auto;
+@media screen and (min-width: 960px) {
+  .home__isLoggedError {
+    width: 25vw;
+  }
 }
 
-.home--title {
-  font-size: 1.5rem;
-  padding-top: 1.5rem;
-}
-
-.home--subtitle {
-  margin-top: 0.5rem;
-}
-
-.home--form {
-  margin-top: 3rem;
-}
-
-.home--form__textarea {
-  resize: none;
-  width: 15rem;
-  height: 4rem;
-  margin: 2rem 0 0 0;
-}
-
-.home--form__characterLimit {
-  max-width: 15rem;
-  margin: 0 auto 1rem auto;
-  font-size: 0.75rem;
-  text-align: right;
-}
-
-.home--form__characterLimit__limit {
-  max-width: 15rem;
-  margin: 0 auto 1rem auto;
-  font-size: 0.75rem;
-  text-align: right;
-  color: red;
-}
-
-.home--form__submit {
-  display: block;
-  margin: 0 auto 1rem auto;
-  border: 0px solid black;
-  border-radius: 0.2rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #afaa9a;
-  color: white;
-}
-
-.home--form__select {
-  margin: 0 0 0 0.5rem;
-}
-
-.home--audioPlayer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
+@media screen and (min-width: 1200px) {}
