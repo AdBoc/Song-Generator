@@ -1,0 +1,44 @@
+// MAIN COLORS
+$background-color: linear-gradient(
+  to top,
+  #fdf6e3,
+  #fafafa
+); //linear-gradient(to bottom right, red, yellow);
+$supplementary-color: #afaa9a;
+$hover-color: #9c9785;
+$disabled-color: rgba(
+  $color: #949493,
+  $alpha: 0.2,
+);
+$main-text: black;
+$second-text: white;
+
+//FORMS
+$form-background: white;
+
+//ERROR COLORS
+$error-color: rgba(
+  $color: #ef0000,
+  $alpha: 0.2,
+);
+$error-font: red;
+
+//MEDIA QUERIES
+$width1: 960px;
+$width2: 1200px;
+
+//REUSABLE BUTTON
+@mixin button {
+  display: block;
+  margin: 2rem auto 2rem auto;
+  border: 0px solid black;
+  border-radius: 0.2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: $supplementary-color;
+  color: $second-text;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}

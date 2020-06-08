@@ -1,9 +1,7 @@
+@import "../../assets/styles/variables.scss";
+
 .login {
-  background-image: linear-gradient(
-    to top,
-    #fdf6e3,
-    #fafafa
-  ); //linear-gradient(to bottom right, red, yellow);
+  background-image: $background-color;
   height: 100vh;
   font-family: Lato;
   font-size: 1.25rem;
@@ -17,9 +15,9 @@
   &__loginForm {
     margin: 0 auto 0 auto;
     padding: 0.5rem;
-    border: 1px solid #afaa9a;
+    border: 1px solid $supplementary-color;
     width: 80vw;
-    background-color: white;
+    background-color: $form-background;
 
     &--field {
       display: block;
@@ -30,18 +28,7 @@
     }
 
     &--submit {
-      display: block;
-      margin: 0.5rem auto 0 auto;
-      border: 0px solid black;
-      border-radius: 0.2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #afaa9a;
-      color: white;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #9c9785;
-      }
+      @include button;
     }
   }
 

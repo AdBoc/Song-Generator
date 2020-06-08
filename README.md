@@ -21,10 +21,10 @@ v 0.7 - fixed login and username problem
 v 0.7.5 - added css and max-length counter to textField
 v 0.7.9 - added simple media queries, moved setToken to login reducer, moved login to apiService, added Errors that login or email is already taken
 v 0.8 - added getUser in API and in Client, userData is now shown in user tab
+v 0.8.1 - changes to sass
 
 ToDo:
 weryfikacja pol
-api zwraca dane uzytkownika dla usera (nowy kod dla user)
 dark mode
 
 jeden button jest napisany kilka razy, kolory i zmienne mozna gdzies trzymac

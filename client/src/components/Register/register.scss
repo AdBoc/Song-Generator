@@ -1,9 +1,7 @@
+@import "../../assets/styles/variables.scss";
+
 .register {
-  background-image: linear-gradient(
-    to top,
-    #fdf6e3,
-    #fafafa
-  ); //linear-gradient(to bottom right, red, yellow);
+  background-image: $background-color;
   height: 100vh;
   font-family: Lato;
   font-size: 1.25rem;
@@ -17,10 +15,9 @@
   &__registerForm {
     margin: 0 auto 0 auto;
     padding: 0.5rem;
-    border: 1px solid #afaa9a;
+    border: 1px solid $supplementary-color;
     width: 80vw;
-    background-color: white;
-
+    background-color: $form-background;
     &--field {
       display: block;
       margin: 0.5rem auto 0.5rem auto;
@@ -30,24 +27,13 @@
     }
 
     &--submit {
-      display: block;
-      margin: 1rem auto 0.5rem auto;
-      border: 0px solid black;
-      border-radius: 0.2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #afaa9a;
-      color: white;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #9c9785;
-      }
+      @include button;
     }
 
     &--error {
-      background-color: rgba($color: #ef0000, $alpha: 0.2);
-      color: red;
-      border: 1px solid red;
+      background-color: error-color;
+      color: $error-font;
+      border: 1px solid $error-font;
       padding: 0.5rem;
       margin: 1rem auto;
     }

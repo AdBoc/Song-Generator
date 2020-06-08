@@ -1,18 +1,16 @@
+@import "../../assets/styles/variables.scss";
+
 .home {
-  background-image: linear-gradient(
-    to top,
-    #fdf6e3,
-    #fafafa
-  ); //linear-gradient(to bottom right, red, yellow);
+  background-image: $background-color;
   height: 100vh;
   text-align: center;
   font-family: Lato;
   padding-top: 1.5rem;
 
   &__isLoggedError {
-    background-color: rgba($color: #ef0000, $alpha: 0.2);
-    color: red;
-    border: 1px solid red;
+    background-color: $error-color;
+    color: $error-font;
+    border: 1px solid $error-font;
     padding: 0.5rem;
     width: 70vw;
     margin: 0 auto 0 auto;
@@ -52,27 +50,20 @@
         margin: 0 auto 1rem auto;
         font-size: 0.75rem;
         text-align: right;
-        color: red;
+        color: $error-font;
       }
     }
 
     &__submit {
-      display: block;
-      margin: 0 auto 1rem auto;
-      border: 0px solid black;
-      border-radius: 0.2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #afaa9a;
-      color: white;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #9c9785;
-      }
+      @include button;
 
       &:disabled {
-        background-color: rgba($color: #949493, $alpha: 0.2);
+        background-color: $disabled-color;
       }
+    }
+
+    &__downloadButton {
+      @include button;
     }
 
     &__select {

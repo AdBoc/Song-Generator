@@ -1,5 +1,7 @@
+@import "../../assets/styles/variables.scss";
+
 .navbar {
-  background-color: #afaa9a;
+  background-color: $supplementary-color;
 
   &__flex {
     display: flex;
@@ -7,7 +9,7 @@
     justify-content: space-around;
 
     &--item {
-      color: white;
+      color: $second-text;
       padding: 1rem;
       cursor: pointer;
     }
@@ -25,7 +27,7 @@
       }
 
       &:hover {
-        background-color: #9c9785;
+        background-color: $hover-color;
       }
     }
   }

@@ -21,26 +21,31 @@ const Home = () => {
   useEffect(() => {
     return () => {
       console.log('unmounting');
-      _isMounted.current = false
+      _isMounted.current = false;
       console.log(_isMounted.current);
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (authStatus.token) {
       setLoading(true);
-      ApiService.generateNewSong(authStatus.token, textField, language, _isMounted.current).then(response => { if (_isMounted.current) { setSong(response); setLoading(false) } else { return null; } });
-    } //co jesli reponsem jest error w promise
+      const newSong = await ApiService.generateNewSong(authStatus.token, textField, language, _isMounted.current);
+      if (_isMounted.current) {
+        setSong(newSong);
+        setLoading(false);
+      }
+    }
   }
+
 
   const handleDownload = () => {
     ApiService.downloadSong(song);
   }
 
   const isButtonValid = () => {
-    return authStatus.isLogged && !isLoading
+    return authStatus.isLogged && !isLoading;
   }
 
   const maxTextField = (e) => {
@@ -72,7 +77,7 @@ const Home = () => {
 
       <audio className="home__audioPlayer" controls src={song} type="audio/mp3" />
       {isLoading && <div className="home__form--loading">Loading...</div>}
-      {song ? <button className="home__form__submit" onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
+      {song ? <button className="home__form__downloadButton" onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
     </div >
   )
 }
