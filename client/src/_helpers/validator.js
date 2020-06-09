@@ -2,7 +2,16 @@ export const validator = (fields) => {
   let errors = {};
 
   if (fields.hasOwnProperty('notEmpty')) {
-    errors.notEmpty = "Field is required";
+    if (errors.notEmpty === '')
+      errors.notEmpty = "Field is required";
+  }
+
+  if (fields.hasOwnProperty('login')) {
+    if (!fields.login) {
+      errors.login = "Field is required";
+    } else if (fields.login.length < 9) {
+      errors.login = "Login needs to have more than 8 characters";
+    }
   }
 
   if (fields.hasOwnProperty('email')) {
@@ -17,14 +26,14 @@ export const validator = (fields) => {
   if (fields.hasOwnProperty('password')) {
     if (!fields.password) {
       errors.password = "Password is required";
-    } else if (fields.password.length < 10) {
+    } else if (fields.password.length < 9) {
       errors.password = "Password needs to have more than 8 characters";
     }
   }
 
   if (fields.hasOwnProperty('confirmPassword')) {
-    if (fields.passwordConfirm !== fields.password) {
-      errors.passwordConfirm = "Passwords need to be same";
+    if (fields.confirmPassword !== fields.password) {
+      errors.passwordConfirm = "Passwords are not matching";
     }
   }
 

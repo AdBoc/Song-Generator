@@ -1,6 +1,7 @@
 import {
     AUTHORIZE,
     LOGIN_SUCCESS,
+    LOGIN_FAILURE,
     LOGOUT
 } from '../constants';
 
@@ -20,6 +21,12 @@ const authReducer = (state, action) => {
             }
         case LOGOUT:
             localStorage.removeItem('token');
+            return {
+                isLogged: false,
+                token: null
+            }
+        case LOGIN_FAILURE:
+            console.log('Login Failure');
             return {
                 isLogged: false,
                 token: null

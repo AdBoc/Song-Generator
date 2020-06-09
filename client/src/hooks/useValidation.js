@@ -1,39 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { validator } from '../_helpers/validator';
 
-export const useValidation = (fields) => {
+export const useValidation = (fields, submit) => {
   const [validationErrors, setValidationErrors] = useState({});
+  const didMount = useRef(false);
 
-  // useEffect(() => {
-  //   const variable = validator(fields);
-  //   if (!!variable) {
-  //     setValidationErrors(variable);
-  //   } else {
-  //     setValidationErrors(false);
-  //   }
-
-  //   return () => {
-  //     console.log("cleanup");
-  //   }
-  // }, [fields])
-
-  // const validate = () => {
-  //   return validator(fields);
-  // }
-
-  const validate = () => {
-    const variable = validator(fields);
-    if (!!variable) {
-      setValidationErrors(variable);
+  useEffect(() => {
+    if (didMount.current) {
+      const variable = validator(fields);
+      if (!!variable) {
+        setValidationErrors(variable);
+      } else {
+        setValidationErrors(false);
+      }
     } else {
-      setValidationErrors(false);
-    }
-  }
-
-  validate();
+      didMount.current = true;
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submit])
 
   return {
-    validationErrors,
-    validate
+    validationErrors
   };
 }

@@ -14,8 +14,13 @@ const Home = () => {
   const [charactersLeft, setCharactersLeft] = useState(32);
 
   useEffect(() => {
-    if (authStatus.token)
-      ApiService.getSong(authStatus.token).then(response => { setSong(response) }).catch(error => console.log('spawn SturmTiger'));
+    async function getSong() {
+      if (authStatus.token) {
+        const response = await ApiService.getSong(authStatus.token);
+        setSong(response)
+      }
+    }
+    getSong();
   }, [authStatus.token]);
 
   useEffect(() => {

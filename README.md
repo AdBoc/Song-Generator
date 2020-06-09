@@ -25,6 +25,7 @@ v 0.7.9 - added simple media queries, moved setToken to login reducer, moved log
 v 0.8 - added getUser in API and in Client, userData is now shown in user tab
 v 0.8.1 - changes to sass
 v 0.8.2 - added validator
+v 0.8.3 - added async requests
 
 ToDo:
 weryfikacja pol
@@ -34,3 +35,5 @@ ZŁY KOD:
 Errory z backendu sa console logowane
 localStorage.clear(); i window.location.reload(true); znajdujacy sie w apiService
 Nie musze w kazdym requescie podawac token. Moze moge go jakos przeslac do authService. (moze ze storage xd)
+Hover psuje css na mobile
+zmienic refresh z update user na useEfect

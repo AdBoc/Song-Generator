@@ -30,6 +30,17 @@
     &--submit {
       @include button;
     }
+
+    &--validationError {
+      color: $error-font;
+      font-size: 0.8rem;
+    }
+
+    &--error {
+      border: solid 1px red;
+      background-color: rgba(255, 182, 182, 0.425);
+      border-radius: 0.2rem;
+    }
   }
 
   &__register {
@@ -42,6 +53,9 @@
 @media screen and (min-width: 960px) {
   .login__loginForm {
     width: 25vw;
+  }
+  .login__mainText {
+    font-size: 1.69rem;
   }
 }
 

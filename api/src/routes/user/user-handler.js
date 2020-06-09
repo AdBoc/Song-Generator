@@ -8,10 +8,11 @@ class UserHandlerService {
   async add(userData) {
 
     try {
-      const existingUser = !!await mongoDbService.client.model('User').findOne({ email: userData.email, login: userData.login });
+      const existingEmail = !!await mongoDbService.client.model('User').findOne({ email: userData.email });
+      const existingLogin = !!await mongoDbService.client.model('User').findOne({ login: userData.login });
 
-      if (existingUser) {
-        return httpResponseGeneratorService.createResponse(403, 'User alredy exists. Please select another email or password')
+      if (existingLogin || existingEmail) {
+        return httpResponseGeneratorService.createResponse(403, 'User alredy exists. Please select another email or login')
       }
 
       userData.id = uuidv1();

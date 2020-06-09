@@ -15,5 +15,3 @@ const AuthContextProvider = (props) => {
 }
 
 export default AuthContextProvider;
-
-//BYC MOZE POWINIENEM ZROBIC INITIAL STATE W FUNKCJI createContext ??

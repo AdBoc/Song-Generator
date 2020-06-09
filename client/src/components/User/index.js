@@ -20,15 +20,16 @@ const User = () => {
 
   const [userData, setUserData] = useState('');
 
-
   useEffect(() => {
     if (authStatus.token)
       ApiService.getUser(authStatus.token).then(response => { setUserData(response) });
   }, [authStatus.token]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword).then(response => response === 'Email or Username already exists' ? setError(response) : setError(''));
+    
+    const response = await ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword);
+    response === 'Email or Username already exists' ? setError(response) : setError('');
   }
 
   const handleChange = fieldName => () => {
@@ -42,7 +43,7 @@ const User = () => {
         <div className="user__form--field" onClick={handleChange('toggleUsername')}>Login: {userData.login}</div>
         {
           toggleChange.toggleUsername &&
-          <input className="user__form--inputField" type="text" placeholder="user" value={login} onChange={(e) => { setLogin(e.target.value) }} />
+          <input className="user__form--inputField" type="text" placeholder="user" value={login} minLength="9" onChange={(e) => { setLogin(e.target.value) }} />
         }
 
         <div className="user__form--field" onClick={handleChange('toggleEmail')}>Email: {userData.email}</div>
@@ -55,11 +56,11 @@ const User = () => {
         {
           toggleChange.togglePassword &&
           <>
-            <input className="user__form--inputField" type="password" placeholder="new password" value={newPassword} onChange={(e) => { setNewPassword(e.target.value) }} />
-            <input className="user__form--inputField" type="password" placeholder="confirm new password" value={confirmNewPassword} onChange={(e) => { setConfirmNewPassword(e.target.value) }} />
+            <input className="user__form--inputField" type="password" placeholder="new password" minLength="9" value={newPassword} onChange={(e) => { setNewPassword(e.target.value) }} />
+            <input className="user__form--inputField" type="password" placeholder="confirm new password" minLength="9" value={confirmNewPassword} onChange={(e) => { setConfirmNewPassword(e.target.value) }} />
           </>
         }
-        {error && <p>error</p>}
+        {error && <p>{error}</p>}
         <input className="user__form--submit" type="submit" value="submit" />
       </form>
     </div>
@@ -67,10 +68,3 @@ const User = () => {
 }
 
 export default User;
-// Przesylac w propsach i zrobic trzy te same komponenty tak, ze sa reusable
-// Jak sie chowa to powinien byc czyszczony const handleChange = fieldName => () => {setToggleChange(prev => ({ ...prev, [fieldName]: !prev[fieldName] }) setFieldName(''););}
-// albo wszystko czysci i daje na false ecksDII
-
-//moge dac pole na required i w api to toggleChange.toggleUsername powinno byc na true
-
-//handleChange z OnClick zostal tak napisany aby nie pisac tego samego kodu 3 razy dla roznych classNamow, field name to to co jest w nawiasach, jesli nie ma w konstrukcji (fieldname) => () => to jest caly czas w kolko wykonywana bo zmienia setState

@@ -12,12 +12,11 @@ class ApiService {
       const url = window.URL.createObjectURL(mp3);
       return url
     }).catch(error => {
-      console.log(error);
       if (error.message === 'Request failed with status code 401') {
         localStorage.clear();
         window.location.reload(true);
       }
-      return '' //do zmiany raczej
+      return ''
     });
   }
 
@@ -35,7 +34,6 @@ class ApiService {
       const url = window.URL.createObjectURL(mp3);
       return url;
     }).catch(error => {
-      console.log(error);
       return {}
     })
   }
@@ -76,9 +74,9 @@ class ApiService {
       }
     }).then(response => {
       console.log(response);
+      window.location.reload(true);
       return response;
     }).catch(error => {
-      console.log(error);
       if (error.message === 'Request failed with status code 403')
         return 'Email or Username already exists';
       return error;
@@ -95,7 +93,6 @@ class ApiService {
         return token;
       })
       .catch(error => {
-        console.log(error);
         return null;
       });
   }
@@ -110,7 +107,6 @@ class ApiService {
         return response.data;
       })
       .catch(error => {
-        console.log(error);
         return null;
       })
   }

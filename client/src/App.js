@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { history } from './_helpers/history';
 
 import Home from './components/Home';
@@ -34,7 +34,7 @@ function App() {
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <PrivateRoute path='/user' component={User} />
-          <Route component={() => <div>Route Does Not Exist</div>} />
+          <Route component={() => <Redirect to="/" />} />
         </Switch>
       </div>
     </Router>
@@ -42,5 +42,3 @@ function App() {
 }
 
 export default App;
-//isLogged null, false, true
-//moge zrobic get token w dispachu

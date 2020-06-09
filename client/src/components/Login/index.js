@@ -12,13 +12,18 @@ import './login.scss';
 const Login = () => {
   const { authStatus, dispatch } = useContext(authContext);
   const [fields, setFields] = useState({ email: '', password: '' });
-  const { validationErrors, validate } = useValidation(fields);
+  const [checkValidation, setCheckValidation] = useState(false);
+  const { validationErrors } = useValidation(fields, checkValidation);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, login } = fields;
+    setCheckValidation((prev) => !prev);
+
+    console.log('validationErrors in login ' + !validationErrors)
     if (!validationErrors) {
-      ApiService.login(email, login).then(token => token ? dispatch({ type: LOGIN_SUCCESS, payload: token }) : dispatch({ type: LOGIN_FAILURE }));
+      const { email, password } = fields;
+      const token = await ApiService.login(email, password);
+      token ? dispatch({ type: LOGIN_SUCCESS, payload: token }) : dispatch({ type: LOGIN_FAILURE });
     }
   }
 
@@ -38,12 +43,26 @@ const Login = () => {
           <div className="login__loginForm">
             <p className="login__mainText">Login</p>
             <form onSubmit={handleSubmit} noValidate>
-              <input className="login__loginForm--field" type="text" placeholder="email" name="email" value={fields.email}
-                onChange={handleFields} required />
-              {validationErrors.email ? validationErrors.email : null}
-              <input className="login__loginForm--field" type="password" placeholder="password" name="password" value={fields.password}
-                onChange={handleFields} required />
-              {validationErrors.password ? validationErrors.password : null}
+              <p style={{ marginTop: '1rem' }}>Email</p>
+              <input
+                className={validationErrors.email ? "login__loginForm--field login__loginForm--error" : "login__loginForm--field"}
+                type="text"
+                placeholder="email"
+                name="email"
+                value={fields.email}
+                onChange={handleFields} />
+              {validationErrors.email && <p className="login__loginForm--validationError">{validationErrors.email}</p>}
+
+              <p>Password</p>
+              <input
+                className={validationErrors.password ? "login__loginForm--field login__loginForm--error" : "login__loginForm--field"}
+                type="password"
+                placeholder="password"
+                name="password"
+                value={fields.password}
+                onChange={handleFields} />
+              {validationErrors.password && <p className="login__loginForm--validationError">{validationErrors.password}</p>}
+
               <input className="login__loginForm--submit" type="submit" value="submit" />
             </form>
             <p className="login__register">Not registered? <Link to={'/register'}>Create an account</Link></p>
@@ -55,4 +74,3 @@ const Login = () => {
 };
 
 export default Login;
-//moge zrboic wlasne NoValidate do form
