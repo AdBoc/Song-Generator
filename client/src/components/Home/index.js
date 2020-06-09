@@ -20,9 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     return () => {
-      console.log('unmounting');
       _isMounted.current = false;
-      console.log(_isMounted.current);
     }
   }, []);
 
@@ -38,7 +36,6 @@ const Home = () => {
       }
     }
   }
-
 
   const handleDownload = () => {
     ApiService.downloadSong(song);
@@ -75,7 +72,7 @@ const Home = () => {
         <input className="home__form__submit" type="submit" value="Submit" disabled={isButtonValid() ? false : true}></input>
       </form>
 
-      <audio className="home__audioPlayer" controls src={song} type="audio/mp3" />
+      {song ? <audio className="home__audioPlayer" controls src={song} type="audio/mp3" /> : null}
       {isLoading && <div className="home__form--loading">Loading...</div>}
       {song ? <button className="home__form__downloadButton" onClick={handleDownload} disabled={isButtonValid() ? false : true}>Download song</button> : null}
     </div >

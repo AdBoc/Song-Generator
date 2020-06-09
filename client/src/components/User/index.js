@@ -30,6 +30,7 @@ const User = () => {
     e.preventDefault();
     ApiService.updateUser(authStatus.token, login, email, newPassword, confirmNewPassword).then(response => response === 'Email or Username already exists' ? setError(response) : setError(''));
   }
+
   const handleChange = fieldName => () => {
     setToggleChange(prev => ({ ...prev, [fieldName]: !prev[fieldName] }));
   }
@@ -71,3 +72,5 @@ export default User;
 // albo wszystko czysci i daje na false ecksDII
 
 //moge dac pole na required i w api to toggleChange.toggleUsername powinno byc na true
+
+//handleChange z OnClick zostal tak napisany aby nie pisac tego samego kodu 3 razy dla roznych classNamow, field name to to co jest w nawiasach, jesli nie ma w konstrukcji (fieldname) => () => to jest caly czas w kolko wykonywana bo zmienia setState
