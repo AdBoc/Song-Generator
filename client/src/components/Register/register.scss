@@ -10,6 +10,7 @@
 
   &__mainText {
     padding: 1rem;
+    font-size: 1.7rem;
   }
 
   &__registerForm {
@@ -18,9 +19,11 @@
     border: 1px solid $supplementary-color;
     width: 80vw;
     background-color: $form-background;
+    @include errorValidation;
+
     &--field {
       display: block;
-      margin: 0.5rem auto 0.5rem auto;
+      margin: 0.5rem auto 0.75rem auto;
       padding: 0.25rem;
       font-size: 1rem;
       min-width: 14rem;
@@ -28,14 +31,6 @@
 
     &--submit {
       @include button;
-    }
-
-    &--error {
-      background-color: error-color;
-      color: $error-font;
-      border: 1px solid $error-font;
-      padding: 0.5rem;
-      margin: 1rem auto;
     }
   }
 }

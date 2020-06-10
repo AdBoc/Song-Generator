@@ -32,7 +32,9 @@ export const validator = (fields) => {
   }
 
   if (fields.hasOwnProperty('confirmPassword')) {
-    if (fields.confirmPassword !== fields.password) {
+    if (!fields.confirmPassword) {
+      errors.passwordConfirm = "Password must be confirmed";
+    } else if (fields.confirmPassword !== fields.password) {
       errors.passwordConfirm = "Passwords are not matching";
     }
   }

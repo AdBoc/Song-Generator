@@ -42,3 +42,17 @@ $width2: 1200px;
     background-color: $hover-color;
   }
 }
+
+@mixin errorValidation {
+  &--validationError {
+    color: $error-font;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &--error {
+    border: solid 1px red;
+    background-color: rgba(255, 182, 182, 0.425);
+    border-radius: 0.2rem;
+  }
+}

@@ -10,6 +10,7 @@
 
   &__mainText {
     padding: 1rem;
+    font-size: 1.69rem;
   }
 
   &__loginForm {
@@ -18,6 +19,7 @@
     border: 1px solid $supplementary-color;
     width: 80vw;
     background-color: $form-background;
+    @include errorValidation;
 
     &--field {
       display: block;
@@ -29,17 +31,6 @@
 
     &--submit {
       @include button;
-    }
-
-    &--validationError {
-      color: $error-font;
-      font-size: 0.8rem;
-    }
-
-    &--error {
-      border: solid 1px red;
-      background-color: rgba(255, 182, 182, 0.425);
-      border-radius: 0.2rem;
     }
   }
 
@@ -53,9 +44,6 @@
 @media screen and (min-width: 960px) {
   .login__loginForm {
     width: 25vw;
-  }
-  .login__mainText {
-    font-size: 1.69rem;
   }
 }
 

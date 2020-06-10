@@ -11,7 +11,6 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch({ type: LOGOUT })
-    window.location.reload();
   }
 
   return (

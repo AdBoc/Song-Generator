@@ -26,6 +26,7 @@ v 0.8 - added getUser in API and in Client, userData is now shown in user tab
 v 0.8.1 - changes to sass
 v 0.8.2 - added validator
 v 0.8.3 - added async requests
+v 0.8.4 - validation works like normal function, components rewritten
 
 ToDo:
 weryfikacja pol
